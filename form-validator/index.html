@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Format validator</title>
+  </head>
+  <body>
+    <main class="main-container">
+      <h1 id="form-title">Register with us</h1>
+      <form action="" id="form" class="form">
+        <div id="form-border">
+          <div class="form-field" id="username-field">
+            <label for="username" class="field-label">User name</label>
+            <input
+              type="text"
+              id="username"
+              class="field-input"
+              placeholder="Enter your user name"
+              required
+              autofocus
+            />
+            <span id="usernmame-error" class="error-message"
+              >The user name must be at least 5 characters.</span
+            >
+          </div>
+          <div class="form-field" id="email-field">
+            <label for="email" class="field-label">Email address</label>
+            <input
+              type="email"
+              id="email"
+              class="field-input"
+              placeholder="Enter your email"
+              required
+            />
+            <span id="email-error" class="error-message">Error</span>
+          </div>
+          <div class="form-field" id="password-field">
+            <label for="password" class="field-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="field-input"
+              placeholder="Enter your password"
+              required
+            />
+            <span id="password-error" class="error-message"
+              >Your password must have at least 7 characters and include a
+              number.</span
+            >
+          </div>
+          <div class="form-field" id="password2-field">
+            <label for="password2" class="field-label"
+              >Password confirmation</label
+            >
+            <input
+              type="password"
+              id="password2"
+              class="field-input"
+              placeholder="Enter your password again"
+              required
+            />
+            <span id="password2-error" class="error-message"
+              >Your passwords need to match.</span
+            >
+          </div>
+        </div>
+        <input id="submit-button" type="submit" value="Submit" />
+      </form>
+    </main>
+    <script src="./app.js"></script>
+  </body>
+</html>
