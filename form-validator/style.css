@@ -16,14 +16,12 @@ body {
   align-items: center;
   justify-content: center;
   height: 100vh;
-  background-image: linear-gradient(
-    to right bottom,
-    var(--color-1),
-    #f6b6c7,
-    #f7bbcc,
-    #f7c1d0,
-    #f8c6d4
-  );
+  background-image: linear-gradient(to right bottom,
+      var(--color-1),
+      #f6b6c7,
+      #f7bbcc,
+      #f7c1d0,
+      #f8c6d4);
 }
 
 .main-container {
@@ -81,6 +79,7 @@ body {
 
 .error-message {
   display: block;
+  visibility: hidden;
 
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
@@ -125,4 +124,13 @@ body {
 .submit-button:active {
   background-color: var(--color-1);
   color: var(--color-2);
+}
+
+.input-field-error {
+  border: 2px solid #ff4949;
+}
+
+.visible-error {
+  color: #ff4949;
+  visibility: visible;
 }
