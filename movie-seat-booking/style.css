@@ -1,0 +1,174 @@
+@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
+
+
+
+:root {
+    --color-1: #062d31;
+    --color-2: #031618;
+    --color-3: #14a1b1;
+}
+
+html {
+    --outline: 1px dotted rgba(255, 0, 0, 0.5);
+    --outline: 0px;
+}
+
+* {
+    outline: var(--outline);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+
+
+body {
+    background-color: var(--color-2);
+    font-family: 'Urbanist', sans-serif;
+
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.main-container {
+    background-color: var(--color-3);
+    padding: 70px 40px 60px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.movie-selector-container {
+    margin-bottom: 40px;
+}
+
+.movie-selector-container label {
+    font-size: 22px;
+    color: white;
+    margin-right: 8px;
+}
+
+.movie-selector {
+    font-family: 'Urbanist', sans-serif;
+    text-transform: capitalize;
+    font-size: 17px;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+    font-weight: 600;
+    font-style: italic;
+}
+
+hr {
+    width: 100%;
+    text-align: center;
+    border: solid 1px #efe4e45e;
+}
+
+.seats-code-list {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    gap: 20px;
+    background-color: rgb(255 255 255 / 30%);
+    padding: 8px;
+    border-radius: 3px;
+}
+
+.seats-code-list li {
+    list-style-type: none;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.seat-symbol {
+    width: 15px;
+    height: 12px;
+    background-color: aliceblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.seat-text {
+    font-variant: small-caps;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--color-1);
+}
+
+.screen-perspectiver {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    perspective: 79.4px;
+}
+
+.screen-romance {
+    transform: rotateX(45deg);
+}
+
+.screen {
+    width: 80%;
+    height: 11vh;
+    background-color: white;
+    box-shadow: 1px 10px 12px 0px #E8E8E8;
+    transform: rotateX(348deg);
+    text-align: center;
+    font-size: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: gray;
+    perspective: 10px;
+}
+
+.theater {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+
+.row div {
+    width: 15px;
+    height: 12px;
+    background-color: aliceblue;
+}
+
+.row .seat-symbol:nth-child(2),
+.row .seat-symbol:nth-last-child(3) {
+    margin-right: 15px;
+}
+
+
+.seat-symbol.selected {
+    background-color: var(--color-1);
+}
+
+.seat-symbol.occupied {
+    background-color: #FFB63F;
+}
+
+p.info {
+    font-size: 18px;
+    color: white;
+}
+
+span.seats-quantity,
+span.seats-price {
+    color: var(--color-2);
+    font-weight: 600;
+    text-decoration: underline;
+}

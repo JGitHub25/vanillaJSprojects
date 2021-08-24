@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <main class="main-container">
+
+        <div class="movie-selector-container">
+            <label for="movie-selector">Select your movie</label>
+            <select name="movie-selector" id="movie-selector" class="movie-selector">
+                <option value="el olvido que seremos">el olvido que seremos</option>
+                <option value="another round">another round</option>
+                <option value="batman">batman</option>
+                <option value="portrait of a lady on fire">portrait of a lady on fire</option>
+                <option value="the lego movie">the lego movie</option>
+            </select>
+            <hr>
+        </div>
+        <ul class="seats-code-list">
+            <li class="seat">
+                <div class="seat-symbol available"></div>
+                <span class="seat-text">available</span>
+            </li>
+            <li class="seat">
+                <div class="seat-symbol selected"></div>
+                <span class="seat-text">selected</span>
+            </li>
+            <li class="seat">
+                <div class="seat-symbol occupied"></div>
+                <span class="seat-text">occupied</span>
+            </li>
+        </ul>
+        <div class="screen-container screen-perspectiver">
+            <div class="screen">
+                <div class="screen-romance">💑</div>
+            </div>
+        </div>
+
+        <div class="theater">
+            <div class="row" id="rowA">
+                <div class="seat-symbol" data-seatCode="A1"></div>
+                <div class="seat-symbol" data-seatCode="A2"></div>
+                <div class="seat-symbol" data-seatCode="A3"></div>
+                <div class="seat-symbol" data-seatCode="A4"></div>
+                <div class="seat-symbol" data-seatCode="A5"></div>
+                <div class="seat-symbol" data-seatCode="A6"></div>
+                <div class="seat-symbol" data-seatCode="A7"></div>
+                <div class="seat-symbol" data-seatCode="A8"></div>
+            </div>
+            <div class="row" id="rowB">
+                <div class="seat-symbol" data-seatCode="B1"></div>
+                <div class="seat-symbol" data-seatCode="B2"></div>
+                <div class="seat-symbol" data-seatCode="B3"></div>
+                <div class="seat-symbol" data-seatCode="B4"></div>
+                <div class="seat-symbol" data-seatCode="B5"></div>
+                <div class="seat-symbol" data-seatCode="B6"></div>
+                <div class="seat-symbol" data-seatCode="B7"></div>
+                <div class="seat-symbol" data-seatCode="B8"></div>
+            </div>
+            <div class="row" id="rowC">
+                <div class="seat-symbol" data-seatCode="C1"></div>
+                <div class="seat-symbol" data-seatCode="C2"></div>
+                <div class="seat-symbol" data-seatCode="C3"></div>
+                <div class="seat-symbol" data-seatCode="C4"></div>
+                <div class="seat-symbol" data-seatCode="C5"></div>
+                <div class="seat-symbol" data-seatCode="C6"></div>
+                <div class="seat-symbol" data-seatCode="C7"></div>
+                <div class="seat-symbol" data-seatCode="C8"></div>
+            </div>
+            <div class="row" id="rowD">
+                <div class="seat-symbol" data-seatCode="D1"></div>
+                <div class="seat-symbol" data-seatCode="D2"></div>
+                <div class="seat-symbol" data-seatCode="D3"></div>
+                <div class="seat-symbol" data-seatCode="D4"></div>
+                <div class="seat-symbol" data-seatCode="D5"></div>
+                <div class="seat-symbol" data-seatCode="D6"></div>
+                <div class="seat-symbol" data-seatCode="D7"></div>
+                <div class="seat-symbol" data-seatCode="D8"></div>
+            </div>
+            <div class="row" id="rowE">
+                <div class="seat-symbol" data-seatCode="E1"></div>
+                <div class="seat-symbol" data-seatCode="E2"></div>
+                <div class="seat-symbol" data-seatCode="E3"></div>
+                <div class="seat-symbol" data-seatCode="E4"></div>
+                <div class="seat-symbol" data-seatCode="E5"></div>
+                <div class="seat-symbol" data-seatCode="E6"></div>
+                <div class="seat-symbol" data-seatCode="E7"></div>
+                <div class="seat-symbol" data-seatCode="E8"></div>
+            </div>
+            <div class="row" id="rowF">
+                <div class="seat-symbol" data-seatCode="F1"></div>
+                <div class="seat-symbol" data-seatCode="F2"></div>
+                <div class="seat-symbol" data-seatCode="F3"></div>
+                <div class="seat-symbol" data-seatCode="F4"></div>
+                <div class="seat-symbol" data-seatCode="F5"></div>
+                <div class="seat-symbol" data-seatCode="F6"></div>
+                <div class="seat-symbol" data-seatCode="F7"></div>
+                <div class="seat-symbol" data-seatCode="F8"></div>
+            </div>
+        </div>
+        <p class="info">You have selected <span class="seats-quantity">0</span> seats. The total is $ <span
+                class="seats-price">10.00</span> </p>
+    </main>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
