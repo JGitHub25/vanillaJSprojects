@@ -1,174 +1,196 @@
-@import url('https://fonts.googleapis.com/css2?family=Urbanist&display=swap');
-
-
+@import url("https://fonts.googleapis.com/css2?family=Urbanist&display=swap");
 
 :root {
-    --color-1: #062d31;
-    --color-2: #031618;
-    --color-3: #14a1b1;
+  --color-1: #062d31;
+  --color-2: #031618;
+  --color-3: #14a1b1;
 }
 
 html {
-    --outline: 1px dotted rgba(255, 0, 0, 0.5);
-    --outline: 0px;
+  --outline: 1px dotted rgba(255, 0, 0, 0.5);
+  --outline: 0px;
 }
 
 * {
-    outline: var(--outline);
+  outline: var(--outline);
 }
 
 * {
-    box-sizing: border-box;
+  box-sizing: border-box;
 }
-
-
 
 body {
-    background-color: var(--color-2);
-    font-family: 'Urbanist', sans-serif;
+  background-color: var(--color-2);
+  font-family: "Urbanist", sans-serif;
 
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .main-container {
-    background-color: var(--color-3);
-    padding: 70px 40px 60px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-}
-
-.movie-selector-container {
-    margin-bottom: 40px;
+  background-color: var(--color-3);
+  padding: 70px 40px 60px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
 }
 
 .movie-selector-container label {
-    font-size: 22px;
-    color: white;
-    margin-right: 8px;
+  font-size: 22px;
+  color: white;
+  margin-right: 8px;
 }
 
-.movie-selector {
-    font-family: 'Urbanist', sans-serif;
-    text-transform: capitalize;
-    font-size: 17px;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    background-color: white;
-    font-weight: 600;
-    font-style: italic;
+.movie-time-ticket-container label {
+  font-size: 22px;
+  color: white;
+  margin-right: 8px;
+}
+
+#time-selector {
+  margin-right: 30px;
+}
+
+.movie-selector,
+.time-selector,
+.ticket-selector {
+  font-family: "Urbanist", sans-serif;
+  text-transform: capitalize;
+  font-size: 17px;
+  border: none;
+  padding: 5px;
+  border-radius: 5px;
+  background-color: white;
+  font-weight: 600;
+  font-style: italic;
 }
 
 hr {
-    width: 100%;
-    text-align: center;
-    border: solid 1px #efe4e45e;
+  width: 100%;
+  text-align: center;
+  border: solid 1px #efe4e45e;
+  margin-top: 0;
+  margin-bottom: 40px;
 }
 
 .seats-code-list {
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    gap: 20px;
-    background-color: rgb(255 255 255 / 30%);
-    padding: 8px;
-    border-radius: 3px;
+  display: flex;
+  gap: 20px;
+  background-color: rgb(255 255 255 / 30%);
+  padding: 8px;
+  border-radius: 3px;
 }
 
 .seats-code-list li {
-    list-style-type: none;
-    display: flex;
-    align-items: center;
-    gap: 7px;
+  list-style-type: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 7px;
 }
 
-.seat-symbol {
-    width: 15px;
-    height: 12px;
-    background-color: aliceblue;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+.seat-symbol,
+.seat {
+  width: 15px;
+  height: 12px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.seat.available,
+.seat.selected {
+  cursor: pointer;
+}
+
+.seat.available:hover,
+.seat.selected:hover {
+  transform: scale(1.2);
+}
+
+.available {
+  background-color: aliceblue;
+}
+
+.selected {
+  background-color: var(--color-1);
+  box-shadow: 0 0 10px 1px white;
+}
+
+.occupied {
+  background-color: #ffb63f;
 }
 
 .seat-text {
-    font-variant: small-caps;
-    font-size: 18px;
-    font-weight: 600;
-    color: var(--color-1);
+  font-variant: small-caps;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--color-1);
 }
 
 .screen-perspectiver {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    perspective: 79.4px;
-}
-
-.screen-romance {
-    transform: rotateX(45deg);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  perspective: 79.4px;
 }
 
 .screen {
-    width: 80%;
-    height: 11vh;
-    background-color: white;
-    box-shadow: 1px 10px 12px 0px #E8E8E8;
-    transform: rotateX(348deg);
-    text-align: center;
-    font-size: 50px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    color: gray;
-    perspective: 10px;
+  width: 80%;
+  height: 11vh;
+  background-color: white;
+  box-shadow: 1px 10px 12px 0px #e8e8e8;
+  transform: rotateX(348deg);
+  text-align: center;
+  font-size: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: gray;
+}
+
+.screen-romance {
+  transform: rotateX(45deg);
+  opacity: 0.5;
+}
+
+h4.theater-name {
+  font-size: 19px;
 }
 
 .theater {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 20px;
 }
 
 .row {
-    display: flex;
-    flex-direction: row;
-    gap: 5px;
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
 }
 
 .row div {
-    width: 15px;
-    height: 12px;
-    background-color: aliceblue;
+  width: 15px;
+  height: 12px;
 }
 
-.row .seat-symbol:nth-child(2),
-.row .seat-symbol:nth-last-child(3) {
-    margin-right: 15px;
-}
-
-
-.seat-symbol.selected {
-    background-color: var(--color-1);
-}
-
-.seat-symbol.occupied {
-    background-color: #FFB63F;
+.row .seat:nth-child(2),
+.row .seat:nth-last-child(3) {
+  margin-right: 15px;
 }
 
 p.info {
-    font-size: 18px;
-    color: white;
+  font-size: 18px;
+  color: white;
 }
 
 span.seats-quantity,
 span.seats-price {
-    color: var(--color-2);
-    font-weight: 600;
-    text-decoration: underline;
+  color: var(--color-2);
+  font-weight: 600;
+  text-decoration: underline;
 }
