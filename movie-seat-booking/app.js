@@ -4,6 +4,7 @@ import { ticket } from "./rendering.js";
 import { renderTimes } from "./rendering.js";
 import { renderTheater } from "./rendering.js";
 import { renderTicketsTotal } from "./rendering.js";
+import { selectSeat } from "./rendering.js";
 
 //FUNCTIONS
 
@@ -14,4 +15,8 @@ ticket.addEventListener("change", renderTicketsTotal);
 movie.addEventListener("change", () => {
   renderTimes(moviesNow);
   renderTheater(moviesNow);
+
+  document.querySelectorAll(".seat").forEach((seat) => {
+    seat.addEventListener("click", selectSeat);
+  });
 });

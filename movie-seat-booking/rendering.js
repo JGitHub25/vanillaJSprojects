@@ -80,7 +80,7 @@ export function renderTicketsTotal() {
   totalPrice.innerText = price;
 }
 //### Select seat on click.
-function selectSeat(e) {
+export function selectSeat(e) {
   if (
     e.currentTarget.classList.contains("available") ||
     e.currentTarget.classList.contains("selected")
