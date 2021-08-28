@@ -1,6 +1,42 @@
 import { moviesNow } from "./data.js";
 import { theaters } from "./data.js";
 
+//#=======================CHECK AND SET SESSION INFO===================
+
+// TODO Aquí voy: decidí qué depende de qué: primero se renderiza la página y después pongo los valores de acuerdo
+// al localStorage (no renderizo de acuerdo al localStorage).
+function checkPreviousStorage() {
+  if (localStorage.getItem("sessionStored")) {
+    userSessionInfo = JSON.parse(localStorage.getItem("userSessionInfo"));
+    setUserInfo(userSessionInfo);
+  }
+}
+
+function setUserInfo(info) {}
+
+let userSessionInfo = {};
+
+userSessionInfo = {
+  sessionStored: true,
+  movie: "aquaman",
+  time: "10:12",
+  ticket: "$89",
+  selectedSeats: ["A5", "B9"],
+};
+const {
+  movie: movieTitle,
+  time: movieTime,
+  ticket: ticketPrice,
+  selectedSeats,
+} = userSessionInfo;
+console.log(movieTitle);
+console.log(movieTime);
+console.log(ticketPrice);
+
+// localStorage.setItem("movieTitle", movieTitle);
+// localStorage.setItem("movieTime", movieTime);
+// localStorage.setItem("ticketPrice", ticketPrice);
+// localStorage.setItem("userSessionInfo", JSON.stringify(userSessionInfo));
 //#=======================SELECT EXISTING ELEMENTS===================
 export const movie = document.getElementById("movie-selector");
 export const time = document.getElementById("time-selector");
@@ -109,3 +145,4 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //
+// console.log(JSON.parse(localStorage.getItem("userSessionInfo")).movie);

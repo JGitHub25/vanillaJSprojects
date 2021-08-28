@@ -15,7 +15,7 @@ ticket.addEventListener("change", renderTicketsTotal);
 movie.addEventListener("change", () => {
   renderTimes(moviesNow);
   renderTheater(moviesNow);
-
+  renderTicketsTotal();
   document.querySelectorAll(".seat").forEach((seat) => {
     seat.addEventListener("click", selectSeat);
   });
