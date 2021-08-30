@@ -1,42 +1,6 @@
 import { moviesNow } from "./data.js";
 import { theaters } from "./data.js";
 
-//#=======================CHECK AND SET SESSION INFO===================
-
-// TODO Aquí voy: decidí qué depende de qué: primero se renderiza la página y después pongo los valores de acuerdo
-// al localStorage (no renderizo de acuerdo al localStorage).
-function checkPreviousStorage() {
-  if (localStorage.getItem("sessionStored")) {
-    userSessionInfo = JSON.parse(localStorage.getItem("userSessionInfo"));
-    setUserInfo(userSessionInfo);
-  }
-}
-
-function setUserInfo(info) {}
-
-let userSessionInfo = {};
-
-userSessionInfo = {
-  sessionStored: true,
-  movie: "aquaman",
-  time: "10:12",
-  ticket: "$89",
-  selectedSeats: ["A5", "B9"],
-};
-const {
-  movie: movieTitle,
-  time: movieTime,
-  ticket: ticketPrice,
-  selectedSeats,
-} = userSessionInfo;
-console.log(movieTitle);
-console.log(movieTime);
-console.log(ticketPrice);
-
-// localStorage.setItem("movieTitle", movieTitle);
-// localStorage.setItem("movieTime", movieTime);
-// localStorage.setItem("ticketPrice", ticketPrice);
-// localStorage.setItem("userSessionInfo", JSON.stringify(userSessionInfo));
 //#=======================SELECT EXISTING ELEMENTS===================
 export const movie = document.getElementById("movie-selector");
 export const time = document.getElementById("time-selector");
@@ -55,11 +19,16 @@ function renderMovies(moviesArray) {
   movie.innerHTML = titlesSelect;
 }
 //##Render Time selector
-export function renderTimes(moviesArray) {
+function getMovie(moviesArray) {
   let currentMovieName = movie.value;
   let currentMovieObject = moviesArray.find((givenMovie) => {
     return givenMovie.title === currentMovieName;
   });
+  return currentMovieObject;
+}
+
+export function renderTimes(moviesArray) {
+  let currentMovieObject = getMovie(moviesArray);
   let currentMovieTimesArr = currentMovieObject.showtimes.times;
   let currentMovieTimes = currentMovieTimesArr.map((everyTime) => {
     return `<option value="${everyTime}">${everyTime}</option>`;
@@ -74,7 +43,7 @@ function renderTheaterseats(theaterNameObject) {
 
   function createLines(row) {
     let linesEachRow = "";
-    for (let i = 0; i < theaterLines; i++) {
+    for (let i = 1; i <= theaterLines; i++) {
       linesEachRow += `<div class="seat available" data-seatCode="${row}${i}"></div>`;
     }
 
@@ -88,16 +57,11 @@ function renderTheaterseats(theaterNameObject) {
   });
 
   theaterSeats.innerHTML = theaterElements.join("");
-  console.log(theaterRows);
-  console.log(theaterLines);
 }
 
 export function renderTheater(moviesArray) {
   //Find theater.
-  let currentMovieName = movie.value;
-  let currentMovieObject = moviesArray.find((givenMovie) => {
-    return givenMovie.title === currentMovieName;
-  });
+  let currentMovieObject = getMovie(moviesArray);
   //Render name.
   theaterName.innerHTML = currentMovieObject.showtimes.theater;
   let currentTheater = theaters.find((givenTheater) => {
@@ -117,32 +81,65 @@ export function renderTicketsTotal() {
 }
 //### Select seat on click.
 export function selectSeat(e) {
-  if (
-    e.currentTarget.classList.contains("available") ||
-    e.currentTarget.classList.contains("selected")
-  ) {
-    e.currentTarget.classList.toggle("selected");
-    e.currentTarget.classList.toggle("available");
+  if (e.currentTarget.classList.contains("available")) {
+    e.currentTarget.classList.remove("available");
+    e.currentTarget.classList.add("selected");
+  } else if (e.currentTarget.classList.contains("selected")) {
+    e.currentTarget.classList.add("available");
+    e.currentTarget.classList.remove("selected");
   }
-
   renderTicketsTotal();
+
+  let selectedSeats = JSON.parse(localStorage.getItem("Selected seats"));
+  if (selectedSeats.includes(e.currentTarget.dataset.seatcode)) {
+    selectedSeats = selectedSeats.filter((item) => {
+      return item !== e.currentTarget.dataset.seatcode;
+    });
+  } else {
+    selectedSeats.push(e.currentTarget.dataset.seatcode);
+  }
+  localStorage.setItem("Selected seats", JSON.stringify(selectedSeats));
 }
 
 //##Render page on load.
 function renderOnLoad(moviesArray) {
+  setInitialStorage();
+
   renderMovies(moviesArray);
+  movie.options.selectedIndex = localStorage.getItem("Movie index");
+
   renderTimes(moviesArray);
+  time.options.selectedIndex = localStorage.getItem("Time index");
+
+  ticket.options.selectedIndex = localStorage.getItem("Ticket index");
+
   renderTheater(moviesArray);
-  renderTicketsTotal();
+
+  document.querySelectorAll(".seat").forEach((seat) => {
+    seat.addEventListener("click", selectSeat);
+  });
+
+  let selectedSeatsStorage = JSON.parse(localStorage.getItem("Selected seats"));
+  document.querySelectorAll(".seat").forEach((seat) => {
+    if (selectedSeatsStorage.includes(seat.dataset.seatcode)) {
+      seat.classList.add("selected");
+      seat.classList.remove("available");
+    }
+  });
   console.log("Rendered!");
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   renderOnLoad(moviesNow);
-  document.querySelectorAll(".seat").forEach((seat) => {
-    seat.addEventListener("click", selectSeat);
-  });
+  renderTicketsTotal();
 });
 
-//
-// console.log(JSON.parse(localStorage.getItem("userSessionInfo")).movie);
+//#=======================CHECK AND SET SESSION INFO===================
+function setInitialStorage() {
+  if (localStorage.length === 0) {
+    localStorage.setItem("Movie index", 0);
+    localStorage.setItem("Time index", 0);
+    localStorage.setItem("Ticket index", 0);
+    localStorage.setItem("Selected seats", JSON.stringify([]));
+  }
+}

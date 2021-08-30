@@ -4,9 +4,6 @@ class MovieOnTheaters {
     this.title = title;
     this.showtimes = showtimes;
   }
-  get getterTimes() {
-    return this.showtimes;
-  }
 }
 
 let elOlvidoQueSeremos = new MovieOnTheaters(1, "el olvido que seremos", {
