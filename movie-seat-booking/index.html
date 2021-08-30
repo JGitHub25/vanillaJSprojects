@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>Movie booking</title>
   </head>
 
   <body>
@@ -17,25 +17,15 @@
           name="movie-selector"
           id="movie-selector"
           class="movie-selector"
-        >
-          <!-- <option value="el olvido que seremos">el olvido que seremos</option>
-          <option value="another round">another round</option>
-          <option value="batman">batman</option>
-          <option value="portrait of a lady on fire">
-            portrait of a lady on fire
-          </option>
-          <option value="the lego movie">the lego movie</option> -->
-        </select>
+        ></select>
       </div>
       <div class="movie-time-ticket-container">
         <label for="time-selector">Time:</label>
-
-        <select name="time-selector" id="time-selector" class="time-selector">
-          <option value="3:45">3:45</option>
-          <option value="5:00">5:00</option>
-          <option value="7:30">7:30</option>
-          <option value="9:10">9:10</option>
-        </select>
+        <select
+          name="time-selector"
+          id="time-selector"
+          class="time-selector"
+        ></select>
         <label for="ticket-selector">Ticket:</label>
         <select
           name="ticket-selector"
@@ -69,74 +59,14 @@
         </div>
       </div>
       <h4 id="theater-name" class="theater-name"></h4>
-      <div id="theater" class="theater">
-        <div class="row" id="rowA">
-          <div class="seat available" data-seatCode="A1"></div>
-          <div class="seat available" data-seatCode="A2"></div>
-          <div class="seat available" data-seatCode="A3"></div>
-          <div class="seat available" data-seatCode="A4"></div>
-          <div class="seat available" data-seatCode="A5"></div>
-          <div class="seat available" data-seatCode="A6"></div>
-          <div class="seat available" data-seatCode="A7"></div>
-          <div class="seat available" data-seatCode="A8"></div>
-        </div>
-        <div class="row" id="rowB">
-          <div class="seat selected" data-seatCode="B1"></div>
-          <div class="seat available" data-seatCode="B2"></div>
-          <div class="seat available" data-seatCode="B3"></div>
-          <div class="seat available" data-seatCode="B4"></div>
-          <div class="seat available" data-seatCode="B5"></div>
-          <div class="seat available" data-seatCode="B6"></div>
-          <div class="seat available" data-seatCode="B7"></div>
-          <div class="seat available" data-seatCode="B8"></div>
-        </div>
-        <div class="row" id="rowC">
-          <div class="seat available" data-seatCode="C1"></div>
-          <div class="seat available" data-seatCode="C2"></div>
-          <div class="seat available" data-seatCode="C3"></div>
-          <div class="seat selected" data-seatCode="C4"></div>
-          <div class="seat selected" data-seatCode="C5"></div>
-          <div class="seat available" data-seatCode="C6"></div>
-          <div class="seat available" data-seatCode="C7"></div>
-          <div class="seat available" data-seatCode="C8"></div>
-        </div>
-        <div class="row" id="rowD">
-          <div class="seat available" data-seatCode="D1"></div>
-          <div class="seat available" data-seatCode="D2"></div>
-          <div class="seat available" data-seatCode="D3"></div>
-          <div class="seat available" data-seatCode="D4"></div>
-          <div class="seat available" data-seatCode="D5"></div>
-          <div class="seat occupied" data-seatCode="D6"></div>
-          <div class="seat available" data-seatCode="D7"></div>
-          <div class="seat available" data-seatCode="D8"></div>
-        </div>
-        <div class="row" id="rowE">
-          <div class="seat available" data-seatCode="E1"></div>
-          <div class="seat available" data-seatCode="E2"></div>
-          <div class="seat available" data-seatCode="E3"></div>
-          <div class="seat available" data-seatCode="E4"></div>
-          <div class="seat available" data-seatCode="E5"></div>
-          <div class="seat available" data-seatCode="E6"></div>
-          <div class="seat available" data-seatCode="E7"></div>
-          <div class="seat available" data-seatCode="E8"></div>
-        </div>
-        <div class="row" id="rowF">
-          <div class="seat available" data-seatCode="F1"></div>
-          <div class="seat available" data-seatCode="F2"></div>
-          <div class="seat occupied" data-seatCode="F3"></div>
-          <div class="seat available" data-seatCode="F4"></div>
-          <div class="seat occupied" data-seatCode="F5"></div>
-          <div class="seat occupied" data-seatCode="F6"></div>
-          <div class="seat available" data-seatCode="F7"></div>
-          <div class="seat available" data-seatCode="F8"></div>
-        </div>
-      </div>
+      <div id="theater" class="theater"></div>
       <p class="info">
         You have selected
         <span id="seats-quantity" class="seats-quantity"></span> seats. The
         total is $ <span id="seats-price" class="seats-price"></span>
       </p>
     </main>
+
     <script type="module" src="rendering.js"></script>
     <script type="module" src="app.js"></script>
   </body>
