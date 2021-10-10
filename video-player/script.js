@@ -35,9 +35,9 @@ function updateVideoTime() {
   timestamp.innerHTML = `${min}:${secs}`;
 }
 
-// function setVideoTime() {
-//   video.currentTime = (progressLine.value * video.duration) / 100;
-// }
+function setVideoTime() {
+  video.currentTime = (progressLine.value * video.duration) / 100;
+}
 
 video.addEventListener("click", toggleVideoPlay);
 video.addEventListener("timeupdate", updateVideoTime);
@@ -47,5 +47,12 @@ progressLine.addEventListener("change", setVideoTime);
 document.addEventListener("keydown", function (e) {
   if (e.key === " ") {
     toggleVideoPlay();
+  }
+
+  if (e.key === "ArrowRight") {
+    video.currentTime += 5;
+  }
+  if (e.key === "ArrowLeft") {
+    video.currentTime -= 5;
   }
 });
