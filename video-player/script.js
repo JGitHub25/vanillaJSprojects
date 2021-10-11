@@ -44,6 +44,8 @@ video.addEventListener("timeupdate", updateVideoTime);
 playBtn.addEventListener("click", toggleVideoPlay);
 stopBtn.addEventListener("click", stopVideo);
 progressLine.addEventListener("change", setVideoTime);
+
+let previousVol = 1;
 document.addEventListener("keydown", function (e) {
   if (e.key === " ") {
     toggleVideoPlay();
@@ -54,5 +56,23 @@ document.addEventListener("keydown", function (e) {
   }
   if (e.key === "ArrowLeft") {
     video.currentTime -= 5;
+  }
+  if (e.key === "l") {
+    video.currentTime += 10;
+  }
+  if (e.key === "j") {
+    video.currentTime -= 10;
+  }
+  if (e.key === "ArrowUp" && video.volume <= 0.8) {
+    video.volume += 0.2;
+  }
+  if (e.key === "ArrowDown" && video.volume >= 0.2) {
+    video.volume = (video.volume * 10 - 2) / 10;
+  }
+  if (e.key === "m" && video.volume === 0) {
+    video.volume = previousVol;
+  } else if (e.key === "m" && video.volume !== 0) {
+    previousVol = video.volume;
+    video.volume = 0;
   }
 });
