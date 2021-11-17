@@ -7,12 +7,14 @@ const totalWealthBtn = document.getElementById("calculate-wealth");
 
 let users = [];
 
+function formatMoney(num) {
+  return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+}
+
 function renderUsers() {
   mainElem.innerHTML = "<h2><strong>Person</strong> Wealth</h2>";
   users.forEach((item) => {
-    const formattedNumber = item.wealth
-      .toFixed(2)
-      .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    const formattedNumber = formatMoney(item.wealth);
 
     const element = document.createElement("div");
     element.classList.add("person");
@@ -65,6 +67,23 @@ function showMillionaires() {
   renderUsers();
 }
 
+function getWealth() {
+  const totalWealthElem = document.getElementById("wealth");
+  if (totalWealthElem) {
+    return;
+  }
+
+  const totalWealth = users.reduce((total, item) => total + item.wealth, 0);
+  const totalElem = document.createElement("div");
+  totalElem.id = "wealth";
+  totalElem.innerHTML = `<h3>Total Wealth: <strong>$${formatMoney(
+    totalWealth
+  )}</strong></h3>`;
+
+  mainElem.append(totalElem);
+  console.log(totalWealth);
+}
+
 //DOM Content Loaded.
 document.addEventListener("DOMContentLoaded", () => {
   getUser();
@@ -92,5 +111,10 @@ sortBtn.addEventListener("click", () => {
 
 showMillionairesBtn.addEventListener("click", () => {
   showMillionaires();
+  console.log(`The users are:`, users);
+});
+
+totalWealthBtn.addEventListener("click", () => {
+  getWealth();
   console.log(`The users are:`, users);
 });
