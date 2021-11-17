@@ -22,6 +22,7 @@ async function getUser() {
         .toFixed(2)
         .replace(/\d(?=(\d{3})+\.)/g, "$&,");
       users.push(filteredUser);
+      renderUsers();
       return users;
     }
 
@@ -31,10 +32,9 @@ async function getUser() {
   }
 }
 
-async function renderUser() {
-  const data = await getUser();
+function renderUsers() {
   mainElem.innerHTML = "<h2><strong>Person</strong> Wealth</h2>";
-  data.forEach((item) => {
+  users.forEach((item) => {
     const element = document.createElement("div");
     element.classList.add("person");
     element.innerHTML = `<strong>${item.name}</strong>$${item.wealth}`;
@@ -42,13 +42,27 @@ async function renderUser() {
   });
 }
 
+function doubleMoney() {
+  users.forEach((item) => {
+    item.wealth = +item.wealth.split(".")[0].split(",").join("") * 2;
+    item.wealth = item.wealth.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+  });
+  renderUsers();
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   getUser();
   getUser();
-  renderUser();
+  getUser();
+  renderUsers();
   console.log(`The users are:`, users);
 });
 addUserBtn.addEventListener("click", () => {
-  renderUser();
+  getUser();
+  console.log(`The users are:`, users);
+});
+
+doubleBtn.addEventListener("click", () => {
+  doubleMoney();
   console.log(`The users are:`, users);
 });
