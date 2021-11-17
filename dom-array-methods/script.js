@@ -7,6 +7,21 @@ const totalWealthBtn = document.getElementById("calculate-wealth");
 
 let users = [];
 
+function renderUsers() {
+  mainElem.innerHTML = "<h2><strong>Person</strong> Wealth</h2>";
+  users.forEach((item) => {
+    const formattedNumber = item.wealth
+      .toFixed(2)
+      .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+
+    const element = document.createElement("div");
+    element.classList.add("person");
+    element.innerHTML = `<strong>${item.name}</strong>$${formattedNumber}`;
+    mainElem.append(element);
+  });
+}
+
+//Event handlers.
 async function getUser() {
   try {
     const response = await fetch("https://randomuser.me/api");
@@ -18,10 +33,9 @@ async function getUser() {
         name: `${user.name.title} ${user.name.first} ${user.name.last}`,
         wealth: Math.floor(Math.random() * 1000000),
       };
-      filteredUser.wealth = filteredUser.wealth
-        .toFixed(2)
-        .replace(/\d(?=(\d{3})+\.)/g, "$&,");
+
       users.push(filteredUser);
+
       renderUsers();
       return users;
     }
@@ -32,24 +46,26 @@ async function getUser() {
   }
 }
 
-function renderUsers() {
-  mainElem.innerHTML = "<h2><strong>Person</strong> Wealth</h2>";
-  users.forEach((item) => {
-    const element = document.createElement("div");
-    element.classList.add("person");
-    element.innerHTML = `<strong>${item.name}</strong>$${item.wealth}`;
-    mainElem.append(element);
-  });
-}
-
 function doubleMoney() {
   users.forEach((item) => {
-    item.wealth = +item.wealth.split(".")[0].split(",").join("") * 2;
-    item.wealth = item.wealth.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    item.wealth = item.wealth * 2;
   });
   renderUsers();
 }
 
+function sortUsers() {
+  users.sort((a, b) => {
+    return b.wealth - a.wealth;
+  });
+  renderUsers();
+}
+
+function showMillionaires() {
+  users = users.filter((item) => item.wealth > 1000000);
+  renderUsers();
+}
+
+//DOM Content Loaded.
 document.addEventListener("DOMContentLoaded", () => {
   getUser();
   getUser();
@@ -57,6 +73,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderUsers();
   console.log(`The users are:`, users);
 });
+
+//Event listeners.
 addUserBtn.addEventListener("click", () => {
   getUser();
   console.log(`The users are:`, users);
@@ -64,5 +82,15 @@ addUserBtn.addEventListener("click", () => {
 
 doubleBtn.addEventListener("click", () => {
   doubleMoney();
+  console.log(`The users are:`, users);
+});
+
+sortBtn.addEventListener("click", () => {
+  sortUsers();
+  console.log(`The users are:`, users);
+});
+
+showMillionairesBtn.addEventListener("click", () => {
+  showMillionaires();
   console.log(`The users are:`, users);
 });
