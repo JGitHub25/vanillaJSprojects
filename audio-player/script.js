@@ -64,9 +64,7 @@ const setNextSong = () => {
   }
 };
 
-nextBtn.addEventListener("click", setNextSong);
-
-prevBtn.addEventListener("click", () => {
+const setPrevSong = () => {
   if (songIndex === 0) {
     songIndex = songs.length - 1;
   } else {
@@ -78,7 +76,11 @@ prevBtn.addEventListener("click", () => {
   if (musicContainer.classList.contains("play")) {
     playSong();
   }
-});
+};
+
+nextBtn.addEventListener("click", setNextSong);
+
+prevBtn.addEventListener("click", setPrevSong);
 
 audioElement.addEventListener("timeupdate", (e) => {
   const { duration, currentTime } = e.target;
@@ -96,3 +98,56 @@ audioElement.addEventListener("ended", () => {
 });
 
 progressContainer.addEventListener("click", setTime);
+
+let previousVol = 1;
+document.addEventListener("keydown", function (e) {
+  switch (e.key) {
+    case " ":
+      if (musicContainer.classList.contains("play")) {
+        e.preventDefault();
+        pauseSong();
+      } else {
+        e.preventDefault();
+        playSong();
+      }
+      break;
+    case "m":
+      if (audioElement.volume === 0) {
+        audioElement.volume = previousVol;
+      } else {
+        previousVol = audioElement.volume;
+        audioElement.volume = 0;
+      }
+      break;
+    case "ArrowRight":
+      if (e.shiftKey) {
+        setNextSong();
+      } else {
+        audioElement.currentTime += 5;
+      }
+      break;
+    case "ArrowLeft":
+      if (e.shiftKey) {
+        setPrevSong();
+      } else {
+        audioElement.currentTime -= 5;
+      }
+      break;
+    case "ArrowUp":
+      if (audioElement.volume <= 0.8) {
+        audioElement.volume += 0.2;
+      }
+      break;
+    case "ArrowDown":
+      if (audioElement.volume >= 0.2) {
+        audioElement.volume = (audioElement.volume * 10 - 2) / 10;
+      }
+      break;
+    case "l":
+      audioElement.currentTime += 10;
+      break;
+    case "j":
+      audioElement.currentTime -= 10;
+      break;
+  }
+});
