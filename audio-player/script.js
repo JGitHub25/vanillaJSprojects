@@ -37,7 +37,7 @@ function pauseSong() {
 }
 
 function setTime(e) {
-  const clickX = e.offsetX;
+  const clickX = e.offsetX; //En React: e.nativeEvent.offsetX;
   audioElement.currentTime =
     (clickX / progressContainer.clientWidth) * duration;
 }
