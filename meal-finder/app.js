@@ -7,6 +7,7 @@ const search = document.getElementById("search"),
 
 let mealsDataArray = [];
 
+//Event handlers
 const submitSearch = (e) => {
   e.preventDefault();
 
@@ -29,7 +30,6 @@ const fetchMeal = async (term) => {
     const { data } = await axios.get(
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
     );
-    // const data = await res.json();
     mealsDataArray = data.meals;
     console.log(mealsDataArray);
 
@@ -56,6 +56,32 @@ const fetchMeal = async (term) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+const getRandomMeal = async () => {
+  mealsElem.innerHTML = "";
+  resultHeading.innerHTML = "";
+
+  const term = getRandomLetter();
+
+  console.log(term);
+  try {
+    const { data } = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
+    );
+    const randomMealData =
+      data.meals[Math.floor(Math.random() * data.meals.length)];
+    renderSingleMeal(randomMealData);
+    console.log(data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const getRandomLetter = () => {
+  const alphabet = "abcdefghijklmnopqrstuvwxyz";
+
+  return alphabet[Math.floor(Math.random() * alphabet.length)];
 };
 
 const findMealbyId = (id) => {
@@ -106,6 +132,7 @@ const renderSingleMeal = (meal) => {
 
 //Event listeners.
 searchForm.addEventListener("submit", submitSearch);
+random.addEventListener("click", getRandomMeal);
 mealsElem.addEventListener("click", (e) => {
   const mealInfo = e.composedPath().find((elem) => {
     if (elem.classList) {
