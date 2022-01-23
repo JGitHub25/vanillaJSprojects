@@ -5,7 +5,7 @@ const search = document.getElementById("search"),
   resultHeading = document.getElementById("result-heading"),
   singleMealElem = document.getElementById("single-meal");
 
-const searchMeal = (e) => {
+const submitSearch = (e) => {
   e.preventDefault();
 
   //Clear single meal
@@ -35,6 +35,19 @@ const fetchMeal = async (term) => {
         "There are no search results. Please try again with a new term!";
     } else {
       resultHeading.innerHTML = `<h2>Search results for '${term}':</h2>`;
+      const mealsHTML = data.meals
+        .map((meal) => {
+          const { idMeal, strMealThumb, strMeal } = meal;
+          return `<div class="meal">
+    <img src="${strMealThumb}" alt="${strMeal}" title="${strMeal}">
+    <div class="meal-info" data-mealID='${idMeal}'>
+        <h3>${strMeal}</h3>
+    </div>
+</div>`;
+        })
+        .join("");
+      mealsElem.innerHTML = mealsHTML;
+      search.value = "";
       return data;
     }
   } catch (error) {
@@ -43,4 +56,4 @@ const fetchMeal = async (term) => {
 };
 
 //Event listeners.
-searchForm.addEventListener("submit", searchMeal);
+searchForm.addEventListener("submit", submitSearch);
