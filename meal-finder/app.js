@@ -24,10 +24,10 @@ const submitSearch = (e) => {
 
 const fetchMeal = async (term) => {
   try {
-    const res = await fetch(
-      `https:www.themealdb.com/api/json/v1/1/search.php?s=${term}`
+    const { data } = await axios.get(
+      `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
     );
-    const data = await res.json();
+    // const data = await res.json();
     console.log(data);
 
     if (data.meals === null) {
@@ -55,5 +55,32 @@ const fetchMeal = async (term) => {
   }
 };
 
+const getMealbyId = async (id) => {
+  try {
+    const res = await axios.get(
+      `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
+      { mode: "no-cors" }
+    );
+    console.log(res);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 //Event listeners.
 searchForm.addEventListener("submit", submitSearch);
+mealsElem.addEventListener("click", (e) => {
+  const mealInfo = e.composedPath().find((elem) => {
+    if (elem.classList) {
+      return elem.classList.contains("meal-info");
+    } else {
+      return false;
+    }
+  });
+
+  if (mealInfo) {
+    const mealID = mealInfo.getAttribute("data-mealID");
+    console.log(typeof mealID);
+    getMealbyId(mealID);
+  }
+});
