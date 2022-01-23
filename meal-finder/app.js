@@ -5,6 +5,8 @@ const search = document.getElementById("search"),
   resultHeading = document.getElementById("result-heading"),
   singleMealElem = document.getElementById("single-meal");
 
+let mealsDataArray = [];
+
 const submitSearch = (e) => {
   e.preventDefault();
 
@@ -28,7 +30,8 @@ const fetchMeal = async (term) => {
       `https://www.themealdb.com/api/json/v1/1/search.php?s=${term}`
     );
     // const data = await res.json();
-    console.log(data);
+    mealsDataArray = data.meals;
+    console.log(mealsDataArray);
 
     if (data.meals === null) {
       resultHeading.innerHTML =
@@ -55,16 +58,50 @@ const fetchMeal = async (term) => {
   }
 };
 
-const getMealbyId = async (id) => {
-  try {
-    const res = await axios.get(
-      `http://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`,
-      { mode: "no-cors" }
-    );
-    console.log(res);
-  } catch (error) {
-    console.log(error);
+const findMealbyId = (id) => {
+  const singleMeal = mealsDataArray.find((meal) => {
+    return meal.idMeal === id;
+  });
+  console.log(singleMeal);
+
+  renderSingleMeal(singleMeal);
+};
+
+const renderSingleMeal = (meal) => {
+  const ingredients = [];
+
+  for (let i = 1; i <= 20; i++) {
+    if (meal[`strIngredient${i}`]) {
+      ingredients.push(
+        `${meal[`strIngredient${i}`]} - ${meal[`strMeasure${i}`]}`
+      );
+    } else {
+      break;
+    }
   }
+
+  const { strMeal, strMealThumb, strCategory, strArea, strInstructions } = meal;
+  singleMealElem.innerHTML = `<div class="single-meal">
+  <h1>${strMeal}</h1>
+  <img src="${strMealThumb}" alt="${strMeal}">
+  <div class="single-meal-info">
+    ${strCategory ? `<p>${strCategory}</p>` : ``}
+    ${strArea ? `<p>${strArea}</p>` : ``}
+  </div>
+  <div class="main">
+  <p>${strInstructions}</p>
+  <h2>Ingredients</h2>
+  <ul>
+  ${ingredients
+    .map((ing) => {
+      return `<li>${ing}</li>`;
+    })
+    .join("")}
+  </ul>
+  </div>
+</div>`;
+
+  console.log(ingredients);
 };
 
 //Event listeners.
@@ -80,7 +117,6 @@ mealsElem.addEventListener("click", (e) => {
 
   if (mealInfo) {
     const mealID = mealInfo.getAttribute("data-mealID");
-    console.log(typeof mealID);
-    getMealbyId(mealID);
+    findMealbyId(mealID);
   }
 });
