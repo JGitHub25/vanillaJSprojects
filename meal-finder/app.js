@@ -11,12 +11,11 @@ let mealsDataArray = [];
 const submitSearch = (e) => {
   e.preventDefault();
 
-  //Clear single meal
-  singleMealElem.innerHTML = "";
-
   const searchTerm = search.value;
 
   if (searchTerm.trim()) {
+    //Clear single meal
+    singleMealElem.innerHTML = "";
     fetchMeal(searchTerm);
   } else {
     alert("Enter a value please.");
